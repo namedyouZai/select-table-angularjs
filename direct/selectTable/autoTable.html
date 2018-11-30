@@ -1,0 +1,37 @@
+<div >
+    <!--将指令包裹的dom元素放在这个标签之内-->
+    <div ng-transclude></div>
+   <div  ng-show="tableShow">
+        <table>
+
+            <thead>
+            <tr>
+                <th ng-repeat="thname in tableobj">
+                    {{thname.name}}
+                </th>
+            </tr>
+            </thead>
+            <tbody id="popTbody">
+
+            <tr ng-repeat="data in tabledata | filter : filterfiled as results">
+                <td>{{data.code}}</td>
+            </tr>
+
+            <tr id="noRenderData" ng-if="(tabledata && tabledata.length<1) || results.length==0">
+
+                <td colspan="{{thnum}}" class="nodata">
+                    <div>暂无数据</div>
+                    <button type="button" class="btn k-button-xs-primary">{{btnname}}</button>
+                </td>
+            </tr>
+            <tr ng-if="!tabledata">
+                <td colspan="{{thnum}}" class="nodata">
+                    <i class="fa fa-spinner fa-spin" style="font-family: FontAwesome;font-size: 24px;"></i>
+                    <div>正在加载</div>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div>
+    <div>{{firstPage}}</div>
+
+    <!--单引号里的单引号需要用转义字符  单引号：&#39、&apos，双引号：&quot -->
+
+    <div  select-table
+         tabledata="renderdata"
+         thnum="{{tablethnum}}"
+         filterfield="filterfield"
+         tableobj='[{"name":"供应商名称","code":"name"},{"name":"性质","code":"type==0?&#39个人&#39:&#39企业&#39"},{"name":"联系人姓名","code":"contactPersonName"},{"name":"联系人手机号","code":"contactPersonMobile"}]'
+    >
+        <input type="text" ng-model="filterfield">
+    </div>
+</div>
