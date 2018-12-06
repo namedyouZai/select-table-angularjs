@@ -12,12 +12,12 @@
         <k-col laebl="No.">
             {{$index+1}}
         </k-col>
-        <k-col laebl="姓名"></k-col>
-        <k-col laebl="年龄"></k-col>
-        <k-col laebl="性别"></k-col>
-        <k-col laebl="身高"></k-col>
-        <k-col laebl="体重"></k-col>
-        <k-col laebl="钱"></k-col>
+        <k-col laebl="姓名" prop="name"></k-col>
+        <k-col laebl="年龄" prop="age"></k-col>
+        <k-col laebl="性别" prop="sex"></k-col>
+        <k-col laebl="身高" prop="height"></k-col>
+        <k-col laebl="体重">{{weight | filter: yy-dd-mm}}</k-col>
+        <k-col laebl="钱" prop="money"></k-col>
         <k-col laebl="操作">
             <button ng-click="delete()">删除</button>
             <button ng-click="edit()">编辑</button>

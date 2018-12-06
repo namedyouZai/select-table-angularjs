@@ -17,9 +17,8 @@
                 ktabledata:'='
             },
             restrict:'AE',
-            // templateUrl:'direct/ktable/kHeader.html',
+            templateUrl:'direct/ktable/kBasic.html',
             controller:function ($scope,$element,$compile,$timeout) {
-
 
                 /** 拖拽成功触发方法
                  *   index 拖拽后落下时的元素的序号（下标）
@@ -42,7 +41,7 @@
             },
             link:function (scope, elem, attrs) {
 
-                debugger
+
 
                 // var allCols = elem.children();
                 // for(var i =0,len=allCols.length;i<len;i++) {
@@ -50,6 +49,18 @@
                 // }
 
 
+            },
+            compile:function (element,attrs) {
+                return {
+                    pre:function ($scope, element, attrs, controller) {
+
+                        debugger
+                    },
+                    post:function ($scope, element, attrs, controller) {
+
+
+                    }
+                }
             }
 
         }
