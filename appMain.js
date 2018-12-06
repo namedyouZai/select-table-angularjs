@@ -1,7 +1,7 @@
 /**
  * Created by mamimi on 2018/11/28.
  */
-var ydApp = angular.module('demoApp',['ngRoute'])
+var ydApp = angular.module('demoApp',['ngRoute','ngDraggable'])
     .config(['$routeProvider',function ($routeProvider) {
         $routeProvider
             .when('/',{
@@ -11,6 +11,10 @@ var ydApp = angular.module('demoApp',['ngRoute'])
             .when('/trans',{
                 templateUrl:'views/page2/page2.html',
                 controller:'page2Ctr'
+            })
+            .when('/list',{
+                templateUrl:'views/waybillList/waybillList.html',
+                controller:'waybillListCtr'
             })
             .otherwise('/');
     }]);

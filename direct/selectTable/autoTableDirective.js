@@ -20,14 +20,12 @@
             templateUrl: 'direct/selectTable/autoTable.html',
             transclude:true,
             controller:function ($scope,$element,$compile) {
-                debugger
+
                 $scope.tableobj=JSON.parse($scope.tableobj);
-console.log($scope.tableobj)
                 $scope.tableShow = false;
 
             },
             link:function (scope, elem, attrs) {
-debugger
                 elem.find('input').bind('click',function () {
 
                     scope.tableShow = true;
