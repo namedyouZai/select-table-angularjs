@@ -1,3 +1,20 @@
 table {
     display: table;
 }
+td, th {
+    text-align: center;
+}
+.table_warp {
+    position: relative;
+}
+.k-table_header-warp {
+    position: absolute;
+}
+.k-table_body-warp {
+    position: absolute;
+    top: 30px;
+    overflow-y: auto;
+}
+.k-table__row--striped:nth-child(even) td {
+    background-color: #f5f7fa;
+}

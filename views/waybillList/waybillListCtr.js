@@ -10,7 +10,7 @@ ydApp.controller('waybillListCtr',function ($scope,$rootScope,$timeout) {
             {sex:'女',name:'虞姬',age:'20',height:'172cm',weight:'95',money:'$200',id:5},
             {sex:'男',name:'杨戬',age:'24',height:'175cm',weight:'120',money:'$180',id:6}]
     },1000);
-
+    $scope.parentCtr='父控制器';
     /** 拖拽成功触发方法
      *   index 拖拽后落下时的元素的序号（下标）
      *   obj被拖动数据对象

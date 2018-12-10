@@ -5,23 +5,38 @@
 <!--</div>-->
 
 <div>
-    <k-table ktabledata="waybillList">
-        <k-col laebl="全选">
-            <input name="radio" type="checkbox" value="{{row.id}}">
+    <k-table ktabledata="waybillList" stripe prt="parentCtr" height="150px">
+        <k-col label="全选" type="selection">
+            <!--<input name="radio" type="checkbox" value="">-->
         </k-col>
-        <k-col laebl="No.">
-            {{$index+1}}
+        <k-col label="No.">
+            <!--{{$index+1}}-->
         </k-col>
-        <k-col laebl="姓名" prop="name"></k-col>
-        <k-col laebl="年龄" prop="age"></k-col>
-        <k-col laebl="性别" prop="sex"></k-col>
-        <k-col laebl="身高" prop="height"></k-col>
-        <k-col laebl="体重">{{weight | filter: yy-dd-mm}}</k-col>
-        <k-col laebl="钱" prop="money"></k-col>
-        <k-col laebl="操作">
+        <k-col label="姓名" prop="name" width="80px"></k-col>
+        <k-col label="年龄" prop="age"></k-col>
+        <k-col label="性别" prop="sex"></k-col>
+        <k-col label="身高" prop="height"></k-col>
+        <k-col label="体重">
+            <!--{{weight==='130' ? '是' : '否'}}-->
+        </k-col>
+        <k-col type="selection" label="钱" prop="money"></k-col>
+        <k-col label="操作">
             <button ng-click="delete()">删除</button>
             <button ng-click="edit()">编辑</button>
         </k-col>
 
     </k-table>
 </div>
+<!--<table>-->
+    <!--<tbody>-->
+        <!--<tr ng-repeat="th in ths">-->
+            <!--<th>{{th.name}}</th>-->
+        <!--</tr>-->
+    <!--</tbody>-->
+    <!--<tbody>-->
+        <!--<tr ng-repeat="row in pp">-->
+            <!--<td>{{row.id}}</td>-->
+        <!--</tr>-->
+    <!--</tbody>-->
+
+<!--</table>-->

@@ -1,0 +1,11 @@
+<table ng-style="kTableBodyTableStyle">
+    <tbody>
+        <colgroup>
+            <col ng-repeat="col in bodyData" width="{{col.width || '80px'}}">
+        </colgroup>
+        <tr ng-repeat="row in tablebodydata" ng-class="{true:'el-table__row k-table__row--striped',false:'el-table__row'}[striped]">
+            <td ng-repeat="x in bodyData" ng-class="{true:'k-table-column--selection'}[x.type=='selection']">{{row[x.prop] ? row[x.prop] : 1}}</td>
+
+        </tr>
+    </tbody>
+</table>

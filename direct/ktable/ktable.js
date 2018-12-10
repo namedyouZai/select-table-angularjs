@@ -1,4 +1,6 @@
 /**
+ * 编译函数(compile)负责对模板DOM进行转换。
+ * 链接函数(link)负责将作用域和DOM进行链接
  *  @ 指令数据传输格式：{{parentData}} 只是字符串格式
  *   = 指令数据传输格式：'parentData'      与父级双向绑定
  *   & 传表达式 比如函数
@@ -6,6 +8,8 @@
  *   ketabledata:table页面渲染的数据
  *   label：th名称
  *
+ *   repalce 自定义指令名称是否保留。
+ *  Transclude：是否将原来视图的内容嵌入到视图模板（Template或TemplateUrl）中。
  *
  */
 
@@ -14,16 +18,20 @@
         return {
 
             scope:{
-                ktabledata:'='
+                ktabledata:'=',
+                prt:'='
             },
             restrict:'AE',
+            // repalce:true,
+            transclude : true,
             templateUrl:'direct/ktable/kBasic.html',
-            controller:function ($scope,$element,$compile,$timeout) {
-
+            controller:function ($scope,$element,$compile,$timeout,serviceData) {
+                // 其次执行
                 /** 拖拽成功触发方法
                  *   index 拖拽后落下时的元素的序号（下标）
                  *   obj被拖动数据对象
                  */
+
                 $scope.dropComplete = function(index, obj){
 
                     var idx = $scope.waybillList.indexOf(obj);
@@ -34,32 +42,51 @@
                 $timeout(function () {
                     var HTTP_DATA = [{sex:'女',name:'妲己',age:'24',height:'165cm',weight:'80',money:'$110',id:7},
                         {sex:'男',name:'关羽',age:'22',height:'180cm',weight:'140',money:'$220',id:8}]
-                    $scope.ktabledata.concat(HTTP_DATA);
-                },1000)
+                    $scope.ktabledata = $scope.ktabledata.concat(HTTP_DATA);
+                    serviceData.httpData=$scope.ktabledata;
+                },1000);
+                var vm =this;
+                vm.getServiceThead=function () {
+
+                    for(var i=0,len=serviceData.columns.length;i<len;i++) {
+                        serviceData.thead.push(serviceData.columns[i].label)
+                    }
+
+                    return serviceData;
+                };
 
 
-            },
-            link:function (scope, elem, attrs) {
+                // 设定表格的高度，进行表头固定
+                $scope.kTableBodyWarpStyle = {
+                    height:$scope.height
+                }
 
+                // 将table的样式统一存入到service 供其他子指令取
+                vm.getTableStyle= function (attr) {
 
+                    serviceData.tableStyle={
+                        bodyTableHeight:attr.height,
+                        bodyTableStripe:attr.stripe ===undefined ? false : true
+                    };
+                    $scope.kTableBodyWarpStyle = {height:serviceData.tableStyle.bodyTableHeight}
 
-                // var allCols = elem.children();
-                // for(var i =0,len=allCols.length;i<len;i++) {
-                //
-                // }
+                }
+
 
 
             },
             compile:function (element,attrs) {
-                return {
-                    pre:function ($scope, element, attrs, controller) {
-
-                        debugger
-                    },
-                    post:function ($scope, element, attrs, controller) {
 
 
-                    }
+                // 优先执行
+                return function (scope,ele,$attrs,ctrl) {
+                    // 最后执行
+
+                    ctrl.getTableStyle($attrs);
+                    console.log(ctrl.getServiceThead());
+
+
+
                 }
             }
 

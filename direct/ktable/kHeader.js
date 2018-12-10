@@ -5,7 +5,7 @@
  */
 
 (function () {
-    ydApp.directive('kHeader', function() {
+    ydApp.directive('tableHeader', function() {
         return {
 
             scope:{
@@ -14,14 +14,14 @@
             replace:true,
             restrict:'AE',
             // require: '?kTable',
-            // templateUrl:'direct/',
-            controller:function ($scope,$element,$compile,$timeout) {
+            templateUrl:'direct/ktable/kHeader.html',
+            controller:function ($scope,$element,$compile,$timeout,serviceData) {
 
-                console.log($scope.$column+'1')
+               $scope.headerData = serviceData.columns;
+
             },
             link:function (scope, elem, attrs,ctrl) {
 
-                scope.$column = 1;
 
             }
 

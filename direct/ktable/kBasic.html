@@ -1,15 +1,18 @@
-<div>
+<div class="table_warp">
+    <div ng-transclude></div>
+
     <div class="k-table_header-warp">
         <table-header>
 
         </table-header>
     </div>
 
-    <div class="k-table_body-warp">
-        <table-body>
+    <div class="k-table_body-warp" ng-style="kTableBodyWarpStyle">
+        <table-body tablebodydata="ktabledata" >
 
         </table-body>
         <!--表格数据为空时，显示占位符-->
-        <div class="k-table__empty-block"></div>
+        <div class="k-table_empty-block"></div>
     </div>
+
 </div>

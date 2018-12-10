@@ -1,0 +1,10 @@
+<table ng-style="kTableHeadTableStyle">
+    <colgroup>
+        <col ng-repeat="col in headerData" width="{{col.width || '80px'}}">
+    </colgroup>
+    <thead>
+        <tr>
+            <th ng-repeat="row in headerData">{{row.label}}</th>
+        </tr>
+    </thead>
+</table>
