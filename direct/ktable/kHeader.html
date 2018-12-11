@@ -4,7 +4,11 @@
     </colgroup>
     <thead>
         <tr>
-            <th ng-repeat="row in headerData">{{row.label}}</th>
+            <th ng-repeat="row in headerData" ng-drop="true" ng-drop-success="dropComplete($index,$data,$event)">
+                <span ng-drag="true" ng-drag-data="row" >
+                    {{row.label}}
+                </span>
+            </th>
         </tr>
     </thead>
 </table>

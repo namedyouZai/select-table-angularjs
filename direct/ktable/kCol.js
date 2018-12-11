@@ -11,9 +11,7 @@
     ydApp.directive('kCol', function() {
         return {
 
-            scope:{
-
-            },
+            scope:{},
             // replace:true,
             restrict:'AE',
             // transclude:'element',

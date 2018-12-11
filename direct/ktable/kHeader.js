@@ -18,7 +18,18 @@
             controller:function ($scope,$element,$compile,$timeout,serviceData) {
 
                $scope.headerData = serviceData.columns;
+                /** 拖拽成功触发方法
+                 *   index 拖拽后落下时的元素的序号（下标）
+                 *   obj被拖动数据对象
+                 */
 
+                $scope.dropComplete = function(index, obj){
+
+                    var idx = $scope.headerData.indexOf(obj);
+                    $scope.headerData[idx] = $scope.headerData[index];
+                    $scope.headerData[index] = obj;
+                    // console.log(serviceData.columns)
+                };
             },
             link:function (scope, elem, attrs,ctrl) {
 

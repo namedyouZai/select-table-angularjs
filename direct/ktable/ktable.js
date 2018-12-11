@@ -26,19 +26,8 @@
             transclude : true,
             templateUrl:'direct/ktable/kBasic.html',
             controller:function ($scope,$element,$compile,$timeout,serviceData) {
+                serviceData.parentScope = $scope.$parent;
                 // 其次执行
-                /** 拖拽成功触发方法
-                 *   index 拖拽后落下时的元素的序号（下标）
-                 *   obj被拖动数据对象
-                 */
-
-                $scope.dropComplete = function(index, obj){
-
-                    var idx = $scope.waybillList.indexOf(obj);
-                    $scope.waybillList[idx] = $scope.waybillList[index];
-                    $scope.waybillList[index] = obj;
-                };
-
                 $timeout(function () {
                     var HTTP_DATA = [{sex:'女',name:'妲己',age:'24',height:'165cm',weight:'80',money:'$110',id:7},
                         {sex:'男',name:'关羽',age:'22',height:'180cm',weight:'140',money:'$220',id:8}]

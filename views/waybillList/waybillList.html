@@ -8,19 +8,17 @@
     <k-table ktabledata="waybillList" stripe prt="parentCtr" height="150px">
         <k-col label="全选" type="selection" ></k-col>
         <k-col label="No." type="index"></k-col>
-        <k-col label="姓名" prop="name" propfnc="name=='小丽' ? '是' : '否'"  width="80px"></k-col>
-        <k-col label="年龄" prop="age">
-            <!--propfnc="function(val,json){ if(val>10) return '1' else return '2' }"-->
-            {{age > 10 ? '222':'333'}}
-
+        <k-col label="姓名" prop="name" renderfn="name=='小丽' ? '是' : '否'"  width="80px"></k-col>
+        <k-col label="年龄" prop="age" type="content">
+            <!--renderfn="function(val,json){ if(val>10) return '1' else return '2' }"-->
+            {{row.age | number:2}}
         </k-col>
         <k-col label="性别" prop="sex"></k-col>
         <k-col label="身高" prop="height"></k-col>
-        <k-col label="体重" prop="weight">
-            {{weight==='130' ? '是' : '否'}}
+        <k-col label="体重" prop="weight" >
         </k-col>
         <k-col label="钱" prop="money"></k-col>
-        <k-col label="线路" width="200px">
+        <k-col label="线路" width="200px" type="content" parent="status">
             {{row.sendCity}}{{row.sendDistrict}}→{{row.arriveCity}}{{row.arriveDistrict}}--{{status}}
         </k-col>
         <k-col label="操作" type="content">

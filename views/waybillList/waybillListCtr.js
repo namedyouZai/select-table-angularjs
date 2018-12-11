@@ -9,11 +9,13 @@ ydApp.controller('waybillListCtr',function ($scope,$rootScope,$timeout) {
             {sex:'女',name:'露娜',age:'18',height:'168cm',weight:'98',money:'$150',sendCity:'合肥',sendDistrict:'蜀山',arriveCity:'南京',arriveDistrict:'栖霞',id:4},
             {sex:'女',name:'虞姬',age:'20',height:'172cm',weight:'95',money:'$200',sendCity:'合肥',sendDistrict:'蜀山',arriveCity:'南京',arriveDistrict:'栖霞',id:5},
             {sex:'男',name:'杨戬',age:'24',height:'175cm',weight:'120',money:'$180',sendCity:'合肥',sendDistrict:'蜀山',arriveCity:'南京',arriveDistrict:'栖霞',id:6}]
+
+
     },1000);
+
+
+
     $scope.parentCtr='父控制器';
-    $scope.delete=function () {
-        alert('1')
-    }
 
     $scope.status='1';
     /** 拖拽成功触发方法
