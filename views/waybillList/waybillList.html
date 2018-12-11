@@ -6,23 +6,26 @@
 
 <div>
     <k-table ktabledata="waybillList" stripe prt="parentCtr" height="150px">
-        <k-col label="全选" type="selection">
-            <!--<input name="radio" type="checkbox" value="">-->
+        <k-col label="全选" type="selection" ></k-col>
+        <k-col label="No." type="index"></k-col>
+        <k-col label="姓名" prop="name" propfnc="name=='小丽' ? '是' : '否'"  width="80px"></k-col>
+        <k-col label="年龄" prop="age">
+            <!--propfnc="function(val,json){ if(val>10) return '1' else return '2' }"-->
+            {{age > 10 ? '222':'333'}}
+
         </k-col>
-        <k-col label="No.">
-            <!--{{$index+1}}-->
-        </k-col>
-        <k-col label="姓名" prop="name" width="80px"></k-col>
-        <k-col label="年龄" prop="age"></k-col>
         <k-col label="性别" prop="sex"></k-col>
         <k-col label="身高" prop="height"></k-col>
-        <k-col label="体重">
-            <!--{{weight==='130' ? '是' : '否'}}-->
+        <k-col label="体重" prop="weight">
+            {{weight==='130' ? '是' : '否'}}
         </k-col>
-        <k-col type="selection" label="钱" prop="money"></k-col>
-        <k-col label="操作">
-            <button ng-click="delete()">删除</button>
-            <button ng-click="edit()">编辑</button>
+        <k-col label="钱" prop="money"></k-col>
+        <k-col label="线路" width="200px">
+            {{row.sendCity}}{{row.sendDistrict}}→{{row.arriveCity}}{{row.arriveDistrict}}--{{status}}
+        </k-col>
+        <k-col label="操作" type="content">
+               <button ng-click="delete()">删除</button>
+               <button ng-click="edit()">编辑</button>
         </k-col>
 
     </k-table>

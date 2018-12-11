@@ -2,6 +2,9 @@
  *  @ 指令数据传输格式：{{parentData}} 只是字符串格式
  *   = 指令数据传输格式：'parentData'      与父级双向绑定
  *   & 传表达式 比如函数
+ *
+ *   kCol主要作用是得到 columns的值 [{label:'全选',type:''},{label:'姓名',prop:''}]
+ *
  */
 
 (function () {
@@ -37,12 +40,13 @@
                  * attrs.$attr 形如 {label:'label',prop:'prop'}，不是具体的对象值，需要转化。
                  * return   {"label":"姓名","prop":"name"}
                  */
-                vm.getObjAttr=function (objString,pro) {
+                vm.getObjAttr=function (objString,pro,ele) {
                     var obj={};
                     for(var x in objString[pro]) {
 
                         obj[x] = objString[x];
                     }
+                    obj.htmlContent = ele.html();
                     return obj;
                 }
             },
@@ -50,21 +54,10 @@
 
                 //attrs.$attr 当前kCol元素的属性
 
-                var objAttrs = ctrl.getObjAttr(attrs,"$attr");
+                var objAttrs = ctrl.getObjAttr(attrs,"$attr",elem);
 
-                ctrl.recombineObjToArr(objAttrs)
-
+                ctrl.recombineObjToArr(objAttrs);
             }
-            // ,
-            // compile:function(ele,attr,$transclude) {
-            //
-            //
-            //
-            //     // $transclude(ele,function (clone) {
-            //     //     clone.parent().append('<td>22</td>')
-            //     //     console.log(clone)
-            //     // })
-            // }
 
         }
 

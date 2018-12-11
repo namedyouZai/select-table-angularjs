@@ -22,7 +22,7 @@
                 prt:'='
             },
             restrict:'AE',
-            // repalce:true,
+            replace:true,
             transclude : true,
             templateUrl:'direct/ktable/kBasic.html',
             controller:function ($scope,$element,$compile,$timeout,serviceData) {
@@ -59,7 +59,7 @@
                 // 设定表格的高度，进行表头固定
                 $scope.kTableBodyWarpStyle = {
                     height:$scope.height
-                }
+                };
 
                 // 将table的样式统一存入到service 供其他子指令取
                 vm.getTableStyle= function (attr) {
@@ -73,7 +73,6 @@
                 }
 
 
-
             },
             compile:function (element,attrs) {
 
@@ -84,7 +83,6 @@
 
                     ctrl.getTableStyle($attrs);
                     console.log(ctrl.getServiceThead());
-
 
 
                 }
