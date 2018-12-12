@@ -12,7 +12,21 @@ ydApp.controller('waybillListCtr',function ($scope,$rootScope,$timeout) {
 
 
     },1000);
+    $timeout(function () {
+        $scope.testData=[
+            {book:'JS',year:'2018'},
+            {book:'css',year:'2000'},
+            {book:'nodeJS',year:'2019'},
+            {book:'HTML',year:'3000'},
+            {book:'厚黑学',year:'2930'}
+        ]
 
+
+    },3000);
+
+    $scope.getRow = function () {
+        alert('1')
+    }
 
 
     $scope.parentCtr='父控制器';

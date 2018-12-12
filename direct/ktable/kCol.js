@@ -11,7 +11,6 @@
     ydApp.directive('kCol', function() {
         return {
 
-            scope:{},
             // replace:true,
             restrict:'AE',
             // transclude:'element',
@@ -21,6 +20,18 @@
             // template:'<div></div>',
             controller:function ($scope,$element,$transclude,$compile,$timeout,serviceData) {
 
+                if(!$scope.$parent.tableid) {
+                    throw "请设置tableid";
+                }
+                if(typeof serviceData[$scope.$parent.tableid] !='object') {
+                    serviceData[$scope.$parent.tableid]={
+                        columns:[],
+                        thead:[],
+                        tableStyle:{}
+                    };
+                }
+
+
                 var vm = this;
                 /**
                  * 将单个对象数组集合 columns[{},{},{}]
@@ -28,7 +39,7 @@
                  * @returns {*} 返回的数组对象
                  */
                 vm.recombineObjToArr = function (_data) {
-                    serviceData.columns.push(_data);
+                    serviceData[$scope.$parent.tableid].columns.push(_data);
                     return serviceData;
                 }
                 /**
@@ -38,13 +49,15 @@
                  * attrs.$attr 形如 {label:'label',prop:'prop'}，不是具体的对象值，需要转化。
                  * return   {"label":"姓名","prop":"name"}
                  */
-                vm.getObjAttr=function (objString,pro,ele) {
+
+                vm.getObjAttr=function (objString,pro,ele,contxt) {
                     var obj={};
                     for(var x in objString[pro]) {
 
                         obj[x] = objString[x];
                     }
                     obj.htmlContent = ele.html();
+
                     return obj;
                 }
             },
@@ -52,7 +65,7 @@
 
                 //attrs.$attr 当前kCol元素的属性
 
-                var objAttrs = ctrl.getObjAttr(attrs,"$attr",elem);
+                var objAttrs = ctrl.getObjAttr(attrs,"$attr",elem,scope);
 
                 ctrl.recombineObjToArr(objAttrs);
             }

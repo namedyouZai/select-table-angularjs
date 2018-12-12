@@ -9,7 +9,8 @@
         return {
 
             scope:{
-                tablebodydata:'='
+                tablebodydata:'=',
+                tableid:'='
             },
             replace:true,
             restrict:'AE',
@@ -19,14 +20,15 @@
             templateUrl:'direct/ktable/kBody.html',
             controller:function ($scope,$element,$compile,$transclude,$timeout,serviceData) {
 
-                $scope.bodyData = serviceData.columns;
+
+                $scope.bodyData = serviceData[$scope.tableid].columns;
 
                 // body的样式控制
                 $scope.kTableBodyTableStyle = {
-                    // height:serviceData.tableStyle.bodyTableHeight
+                    // height:serviceData[$scope.tableid].tableStyle.bodyTableHeight
                 };
                 // 隔行变色的控制
-                $scope.striped = serviceData.tableStyle.bodyTableStripe;
+                $scope.striped = serviceData[$scope.tableid].tableStyle.bodyTableStripe;
 
 
             },

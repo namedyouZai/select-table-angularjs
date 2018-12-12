@@ -19,29 +19,30 @@
 
             scope:{
                 ktabledata:'=',
-                prt:'='
+                prt:'=',
+                tableid:'@'
             },
             restrict:'AE',
             replace:true,
             transclude : true,
             templateUrl:'direct/ktable/kBasic.html',
             controller:function ($scope,$element,$compile,$timeout,serviceData) {
-                serviceData.parentScope = $scope.$parent;
+
                 // 其次执行
                 $timeout(function () {
                     var HTTP_DATA = [{sex:'女',name:'妲己',age:'24',height:'165cm',weight:'80',money:'$110',id:7},
-                        {sex:'男',name:'关羽',age:'22',height:'180cm',weight:'140',money:'$220',id:8}]
-                    $scope.ktabledata = $scope.ktabledata.concat(HTTP_DATA);
-                    serviceData.httpData=$scope.ktabledata;
+                        {sex:'男',name:'关羽',age:'22',height:'180cm',weight:'140',money:'$220',id:8}];
+                    $scope.ktabledata = $scope.ktabledata ? $scope.ktabledata.concat(HTTP_DATA) : [];
+                    serviceData[$scope.tableid].httpData=$scope.ktabledata;
                 },1000);
                 var vm =this;
                 vm.getServiceThead=function () {
 
-                    for(var i=0,len=serviceData.columns.length;i<len;i++) {
-                        serviceData.thead.push(serviceData.columns[i].label)
+                    for(var i=0,len=serviceData[$scope.tableid].columns.length;i<len;i++) {
+                        serviceData[$scope.tableid].thead.push(serviceData[$scope.tableid].columns[i].label)
                     }
 
-                    return serviceData;
+                    return serviceData[$scope.tableid];
                 };
 
 
@@ -53,11 +54,11 @@
                 // 将table的样式统一存入到service 供其他子指令取
                 vm.getTableStyle= function (attr) {
 
-                    serviceData.tableStyle={
+                    serviceData[$scope.tableid].tableStyle={
                         bodyTableHeight:attr.height,
                         bodyTableStripe:attr.stripe ===undefined ? false : true
                     };
-                    $scope.kTableBodyWarpStyle = {height:serviceData.tableStyle.bodyTableHeight}
+                    $scope.kTableBodyWarpStyle = {height:serviceData[$scope.tableid].tableStyle.bodyTableHeight}
 
                 }
 

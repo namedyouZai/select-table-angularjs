@@ -8,9 +8,6 @@
 ydApp.factory('serviceData', function() {
 
     return {
-        columns:[],
-        selectIndex:[],
-        thead:[],
-        tableStyle:{}
+
     }
 });

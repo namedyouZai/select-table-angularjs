@@ -5,8 +5,8 @@
 <!--</div>-->
 
 <div>
-    <k-table ktabledata="waybillList" stripe prt="parentCtr" height="150px">
-        <k-col label="全选" type="selection" ></k-col>
+    <k-table ktabledata="waybillList" tableid="waybill" stripe prt="parentCtr" height="150px">
+        <k-col label="全选" type="selection" k-click="getRow"></k-col>
         <k-col label="No." type="index"></k-col>
         <k-col label="姓名" prop="name" renderfn="name=='小丽' ? '是' : '否'"  width="80px"></k-col>
         <k-col label="年龄" prop="age" type="content">
@@ -18,8 +18,9 @@
         <k-col label="体重" prop="weight" >
         </k-col>
         <k-col label="钱" prop="money"></k-col>
-        <k-col label="线路" width="200px" type="content" parent="status">
-            {{row.sendCity}}{{row.sendDistrict}}→{{row.arriveCity}}{{row.arriveDistrict}}--{{status}}
+        <k-col label="线路" width="200px" type="content">
+            {{row.sendCity}}{{row.sendDistrict}}→{{row.arriveCity}}{{row.arriveDistrict}}--{{parent.status}}
+
         </k-col>
         <k-col label="操作" type="content">
                <button ng-click="delete()">删除</button>
@@ -28,6 +29,21 @@
 
     </k-table>
 </div>
+<br />
+<div>
+    <k-table ktabledata="testData" tableid="test" stripe prt="parentCtr" height="150px">
+        <k-col label="全选" type="selection" ></k-col>
+        <k-col label="序号." type="index"></k-col>
+        <k-col label="书名" prop="book" ></k-col>
+        <k-col label="年份." prop="year"></k-col>
+        <k-col label="操作" type="content">
+            <button ng-click="delete()">删除</button>
+            <button ng-click="edit()">编辑</button>
+        </k-col>
+
+    </k-table>
+</div>
+
 <!--<table>-->
     <!--<tbody>-->
         <!--<tr ng-repeat="th in ths">-->

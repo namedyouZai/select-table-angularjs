@@ -18,7 +18,7 @@
             restrict:'AE',
             require: '?kTable',
             template:'<div class="cell"></div>',
-            controller:function ($scope,$element,$compile,$transclude,$parse,serviceData) {
+            controller:function ($scope,$element,$compile,$transclude) {
 
                 /**
                  * $element:<div class="k-table_body-cell"></div> clone :
@@ -53,10 +53,13 @@
                     };
                     // 内容里含有渲染字段的 如<kCol> {{row.name}} </kCol>
                     if($scope.celldata.type && $scope.celldata.type=='content') {
-                        // 将parent的更改掉，这样写法的原因是因为作用域的问题
+                        // 将parent的更改掉，这样写法的原因是因为作用域的问题  不用担心外层还会有ctrl 因为外层的也属于最外层ctrl的子作用域 可以访问
                         var replacedHtml = $scope.celldata.htmlContent.replace(/parent/g,'$parent.$parent.$parent.$parent.$parent');
                         $element.append($compile('<span>'+ replacedHtml +'</span>')($scope));
                     };
+                    if($scope.celldata.kClick){
+                        debugger
+                    }
 
                     // 将kcol里面存储的html与根据kcol的属性创建的html分别添加到指令html里。
                     $element.append(renderCell)

@@ -9,7 +9,7 @@
         return {
 
             scope:{
-
+                tableid:'='
             },
             replace:true,
             restrict:'AE',
@@ -17,7 +17,8 @@
             templateUrl:'direct/ktable/kHeader.html',
             controller:function ($scope,$element,$compile,$timeout,serviceData) {
 
-               $scope.headerData = serviceData.columns;
+
+               $scope.headerData = serviceData[$scope.tableid].columns;
                 /** 拖拽成功触发方法
                  *   index 拖拽后落下时的元素的序号（下标）
                  *   obj被拖动数据对象
@@ -28,7 +29,7 @@
                     var idx = $scope.headerData.indexOf(obj);
                     $scope.headerData[idx] = $scope.headerData[index];
                     $scope.headerData[index] = obj;
-                    // console.log(serviceData.columns)
+                    // console.log(serviceData[$scope.tableid].columns)
                 };
             },
             link:function (scope, elem, attrs,ctrl) {

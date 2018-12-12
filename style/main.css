@@ -5,14 +5,14 @@ td, th {
     text-align: center;
 }
 .table_warp {
-    position: relative;
+    /*position: relative;*/
 }
 .k-table_header-warp {
-    position: absolute;
+    /*position: absolute;*/
 }
 .k-table_body-warp {
-    position: absolute;
-    top: 30px;
+    /*position: absolute;*/
+    /*top: 30px;*/
     overflow-y: auto;
 }
 .k-table__row--striped:nth-child(even) td {
