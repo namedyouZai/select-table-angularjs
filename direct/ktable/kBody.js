@@ -30,7 +30,7 @@
                 // 隔行变色的控制
                 $scope.striped = serviceData[$scope.tableid].tableStyle.bodyTableStripe;
 
-
+                console.log(serviceData)
             },
             link:function (scope, elem, attrs,ctrl) {
 

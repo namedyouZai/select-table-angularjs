@@ -6,7 +6,8 @@
         <tr>
             <th ng-repeat="row in headerData" ng-drop="true" ng-drop-success="dropComplete($index,$data,$event)">
                 <span ng-drag="true" ng-drag-data="row" >
-                    {{row.label}}
+                    {{row.label==='全选' ? '' : row.label}}
+                    <input type="checkbox" ng-if="row.type=='selection'">
                 </span>
             </th>
         </tr>

@@ -6,20 +6,34 @@
 
 <div>
     <k-table ktabledata="waybillList" tableid="waybill" stripe prt="parentCtr" height="150px">
-        <k-col label="全选" type="selection" k-click="getRow"></k-col>
+        <k-col label="全选" type="selection" >
+            <!--<diy-template k-click="parent.getRow">-->
+
+            <!--</diy-template>-->
+        </k-col>
         <k-col label="No." type="index"></k-col>
-        <k-col label="姓名" prop="name" renderfn="name=='小丽' ? '是' : '否'"  width="80px"></k-col>
+        <k-col label="姓名" prop="name" width="80px" type="content">
+            <span ng-click="parent.handleSelectionChange(parent.status)">
+                大萨达
+            </span>
+        </k-col>
+        <!--renderfn="name=='小丽' ? '是' : '否'"-->
         <k-col label="年龄" prop="age" type="content">
             <!--renderfn="function(val,json){ if(val>10) return '1' else return '2' }"-->
-            {{row.age | number:2}}
+            <k-template>
+                {{row.age | number:2}}
+            </k-template>
         </k-col>
         <k-col label="性别" prop="sex"></k-col>
         <k-col label="身高" prop="height"></k-col>
-        <k-col label="体重" prop="weight" >
+        <k-col label="体重" prop="weight" type="content1">
+            <a href="javascript:void(0);" ng-click="parent.toDetail(parent.status,parent.pCtr)">点击</a>
         </k-col>
         <k-col label="钱" prop="money"></k-col>
         <k-col label="线路" width="200px" type="content">
-            {{row.sendCity}}{{row.sendDistrict}}→{{row.arriveCity}}{{row.arriveDistrict}}--{{parent.status}}
+            <!--<k-cell slot-scope="">-->
+                {{row.sendCity}}{{row.sendDistrict}}→{{row.arriveCity}}{{row.arriveDistrict}}--{{parent.status}}
+            <!--</k-cell>-->
 
         </k-col>
         <k-col label="操作" type="content">

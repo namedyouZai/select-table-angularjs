@@ -24,13 +24,13 @@
                     throw "请设置tableid";
                 }
                 if(typeof serviceData[$scope.$parent.tableid] !='object') {
+
                     serviceData[$scope.$parent.tableid]={
                         columns:[],
                         thead:[],
                         tableStyle:{}
                     };
                 }
-
 
                 var vm = this;
                 /**
@@ -50,10 +50,9 @@
                  * return   {"label":"姓名","prop":"name"}
                  */
 
-                vm.getObjAttr=function (objString,pro,ele,contxt) {
+                vm.getObjAttr=function (objString,pro,ele) {
                     var obj={};
                     for(var x in objString[pro]) {
-
                         obj[x] = objString[x];
                     }
                     obj.htmlContent = ele.html();
@@ -65,7 +64,7 @@
 
                 //attrs.$attr 当前kCol元素的属性
 
-                var objAttrs = ctrl.getObjAttr(attrs,"$attr",elem,scope);
+                var objAttrs = ctrl.getObjAttr(attrs,"$attr",elem);
 
                 ctrl.recombineObjToArr(objAttrs);
             }

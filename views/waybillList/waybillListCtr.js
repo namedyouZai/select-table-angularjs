@@ -1,7 +1,7 @@
 /**
  * Created by dell on 2018/12/6.
  */
-ydApp.controller('waybillListCtr',function ($scope,$rootScope,$timeout) {
+ydApp.controller('waybillListCtr',function ($scope,$rootScope,$timeout,EventBus) {
     $timeout(function () {
         $scope.waybillList=[{sex:'女',name:'小丽',age:'13',height:'160cm',weight:'90',money:'$100',sendCity:'合肥',sendDistrict:'蜀山',arriveCity:'南京',arriveDistrict:'栖霞',id:1},
             {sex:'女',name:'娜可露露',age:'14',height:'162cm',weight:'92',money:'$120',sendCity:'上海',sendDistrict:'宝山',arriveCity:'杭州',arriveDistrict:'下城',id:2},
@@ -24,22 +24,27 @@ ydApp.controller('waybillListCtr',function ($scope,$rootScope,$timeout) {
 
     },3000);
 
-    $scope.getRow = function () {
-        alert('1')
+    $scope.handleSelectionChange = function (a) {
+            console.log(a)
     }
 
+    EventBus.bus.on("getRow", function(event) {
+        console.log(event)
+        // 这里处理事件
+    });
 
-    $scope.parentCtr='父控制器';
 
+
+
+    $scope.arr = [1, 2, 3];
+    $scope.pCtr='父控制器';
     $scope.status='1';
-    /** 拖拽成功触发方法
-     *   index 拖拽后落下时的元素的序号（下标）
-     *   obj被拖动数据对象
-     */
-    // $scope.dropComplete = function(index, obj){
-    //
-    //     var idx = $scope.waybillList.indexOf(obj);
-    //     $scope.waybillList[idx] = $scope.waybillList[index];
-    //     $scope.waybillList[index] = obj;
-    // };
+    $scope.toDetail = function (a,b) {
+        console.log($scope.arr);
+        console.log(a+'---'+b)
+    }
+    $scope.show = true;
+    $scope.name = 'htf';
+
+
 });
