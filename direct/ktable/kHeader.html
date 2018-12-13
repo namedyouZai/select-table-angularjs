@@ -7,7 +7,15 @@
             <th ng-repeat="row in headerData" ng-drop="true" ng-drop-success="dropComplete($index,$data,$event)">
                 <span ng-drag="true" ng-drag-data="row" >
                     {{row.label==='全选' ? '' : row.label}}
-                    <input type="checkbox" ng-if="row.type=='selection'">
+                    <i ng-if="row.sort=='true'" ng-click="sortTable(row.prop)">换</i>
+                    <input type="checkbox" ng-if="row.type=='selection'" ng-model="head.tHeadThChecked"  ng-change="selectionAll()">
+
+                    <!--<label role="checkbox" class="el-checkbox">-->
+                        <!--<span aria-checked="mixed" class="el-checkbox__input">-->
+                            <!--<span class="el-checkbox__inner"></span>-->
+                            <!--<input type="checkbox" aria-hidden="true" class="el-checkbox__original" value="">-->
+                        <!--</span>-->
+                    <!--</label>-->
                 </span>
             </th>
         </tr>

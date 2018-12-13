@@ -5,35 +5,34 @@
 <!--</div>-->
 
 <div>
-    <k-table ktabledata="waybillList" tableid="waybill" stripe prt="parentCtr" height="150px">
-        <k-col label="全选" type="selection" >
+    <k-table ktabledata="waybillList" tableid="waybill" stripe prt="parentCtr" height="150px" selection-all="handleSelectionAll">
+        <k-col label="全选" type="selection">
             <!--<diy-template k-click="parent.getRow">-->
 
             <!--</diy-template>-->
         </k-col>
         <k-col label="No." type="index"></k-col>
-        <k-col label="姓名" prop="name" width="80px" type="content">
-            <span ng-click="parent.handleSelectionChange(parent.status)">
-                大萨达
-            </span>
+        <k-col label="姓名" prop="name" width="80px" type="content" >
+            <!--<span ng-click="parent.handleSelectionChange(parent.status)">-->
+                <!--大萨达-->
+            <!--</span>-->
         </k-col>
         <!--renderfn="name=='小丽' ? '是' : '否'"-->
-        <k-col label="年龄" prop="age" type="content">
+        <k-col label="年龄" prop="age" type="content" renderfn="age | number:2" call-back-type="click" call-back-fn="showAge" >
             <!--renderfn="function(val,json){ if(val>10) return '1' else return '2' }"-->
-            <k-template>
-                {{row.age | number:2}}
-            </k-template>
+            <!--{{row.age | number:2}}-->
         </k-col>
-        <k-col label="性别" prop="sex"></k-col>
+        <!--call-back-type="click" call-back-fn="movea"-->
+        <k-col label="性别" prop="sex" sort="true" ></k-col>
         <k-col label="身高" prop="height"></k-col>
         <k-col label="体重" prop="weight" type="content1">
-            <a href="javascript:void(0);" ng-click="parent.toDetail(parent.status,parent.pCtr)">点击</a>
+            <!--<a href="javascript:void(0);" ng-click="parent.toDetail(parent.status,parent.pCtr)">点击</a>-->
         </k-col>
         <k-col label="钱" prop="money"></k-col>
         <k-col label="线路" width="200px" type="content">
-            <!--<k-cell slot-scope="">-->
-                {{row.sendCity}}{{row.sendDistrict}}→{{row.arriveCity}}{{row.arriveDistrict}}--{{parent.status}}
-            <!--</k-cell>-->
+           <k-template data="row">
+               {{row.sendCity}}{{row.sendDistrict}}→{{row.arriveCity}}{{row.arriveDistrict}}--{{parent.status}}
+           </k-template>
 
         </k-col>
         <k-col label="操作" type="content">
@@ -44,19 +43,19 @@
     </k-table>
 </div>
 <br />
-<div>
-    <k-table ktabledata="testData" tableid="test" stripe prt="parentCtr" height="150px">
-        <k-col label="全选" type="selection" ></k-col>
-        <k-col label="序号." type="index"></k-col>
-        <k-col label="书名" prop="book" ></k-col>
-        <k-col label="年份." prop="year"></k-col>
-        <k-col label="操作" type="content">
-            <button ng-click="delete()">删除</button>
-            <button ng-click="edit()">编辑</button>
-        </k-col>
+<!--<div>-->
+    <!--<k-table ktabledata="testData" tableid="test" stripe prt="parentCtr" height="150px">-->
+        <!--<k-col label="全选" type="selection" ></k-col>-->
+        <!--<k-col label="序号." type="index"></k-col>-->
+        <!--<k-col label="书名" prop="book" ></k-col>-->
+        <!--<k-col label="年份." prop="year"></k-col>-->
+        <!--<k-col label="操作" type="content">-->
+            <!--<button ng-click="delete()">删除</button>-->
+            <!--<button ng-click="edit()">编辑</button>-->
+        <!--</k-col>-->
 
-    </k-table>
-</div>
+    <!--</k-table>-->
+<!--</div>-->
 
 <!--<table>-->
     <!--<tbody>-->

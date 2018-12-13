@@ -18,7 +18,7 @@
             // replace: true,
             transclude: true,
             templateUrl:'direct/ktable/kBody.html',
-            controller:function ($scope,$element,$compile,$transclude,$timeout,serviceData) {
+            controller:function ($scope,$element,$compile,$timeout,serviceData) {
 
 
                 $scope.bodyData = serviceData[$scope.tableid].columns;
@@ -30,7 +30,6 @@
                 // 隔行变色的控制
                 $scope.striped = serviceData[$scope.tableid].tableStyle.bodyTableStripe;
 
-                console.log(serviceData)
             },
             link:function (scope, elem, attrs,ctrl) {
 

@@ -3,8 +3,8 @@
  */
 ydApp.controller('waybillListCtr',function ($scope,$rootScope,$timeout,EventBus) {
     $timeout(function () {
-        $scope.waybillList=[{sex:'女',name:'小丽',age:'13',height:'160cm',weight:'90',money:'$100',sendCity:'合肥',sendDistrict:'蜀山',arriveCity:'南京',arriveDistrict:'栖霞',id:1},
-            {sex:'女',name:'娜可露露',age:'14',height:'162cm',weight:'92',money:'$120',sendCity:'上海',sendDistrict:'宝山',arriveCity:'杭州',arriveDistrict:'下城',id:2},
+        $scope.waybillList=[{sex:'女',name:'小丽',age:'18',height:'160cm',weight:'90',money:'$100',sendCity:'合肥',sendDistrict:'蜀山',arriveCity:'南京',arriveDistrict:'栖霞',id:1},
+            {sex:'女',name:'娜可露露',age:'16',height:'162cm',weight:'92',money:'$120',sendCity:'上海',sendDistrict:'宝山',arriveCity:'杭州',arriveDistrict:'下城',id:2},
             {sex:'男',name:'李白',age:'16',height:'170cm',weight:'130',money:'$130',sendCity:'合肥',sendDistrict:'蜀山',arriveCity:'南京',arriveDistrict:'栖霞',id:3},
             {sex:'女',name:'露娜',age:'18',height:'168cm',weight:'98',money:'$150',sendCity:'合肥',sendDistrict:'蜀山',arriveCity:'南京',arriveDistrict:'栖霞',id:4},
             {sex:'女',name:'虞姬',age:'20',height:'172cm',weight:'95',money:'$200',sendCity:'合肥',sendDistrict:'蜀山',arriveCity:'南京',arriveDistrict:'栖霞',id:5},
@@ -24,18 +24,17 @@ ydApp.controller('waybillListCtr',function ($scope,$rootScope,$timeout,EventBus)
 
     },3000);
 
-    $scope.handleSelectionChange = function (a) {
-            console.log(a)
+    $scope.handleSelectionChange1 = function (row) {
+        console.log(row)
+    };
+
+    $scope.showAge = function (row) {
+        console.log(row)
     }
 
-    EventBus.bus.on("getRow", function(event) {
-        console.log(event)
-        // 这里处理事件
-    });
-
-
-
-
+    $scope.movea = function (row) {
+        console.log(row)
+    }
     $scope.arr = [1, 2, 3];
     $scope.pCtr='父控制器';
     $scope.status='1';

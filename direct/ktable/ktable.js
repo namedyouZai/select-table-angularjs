@@ -26,7 +26,7 @@
             replace:true,
             transclude : true,
             templateUrl:'direct/ktable/kBasic.html',
-            controller:function ($scope,$element,$compile,$timeout,serviceData) {
+            controller:function ($scope,$element,$compile,$timeout,serviceData,EventBus) {
 
                 // 其次执行
                 $timeout(function () {
@@ -58,10 +58,20 @@
                         bodyTableHeight:attr.height,
                         bodyTableStripe:attr.stripe ===undefined ? false : true
                     };
+                    serviceData[$scope.tableid].headScope = $scope.$parent;
                     $scope.kTableBodyWarpStyle = {height:serviceData[$scope.tableid].tableStyle.bodyTableHeight}
 
                 }
 
+                // 订阅
+                EventBus.on("selectionChange", function(event) {
+
+
+                    $scope.$parent[event.fnName](event.data)
+
+
+                    // 这里处理事件
+                });
 
             },
             compile:function (element,attrs) {

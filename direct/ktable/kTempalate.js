@@ -10,13 +10,12 @@
 
             replace:true,
             restrict:'AE',
-            // require: '?k',
-            templateUrl:'direct/ktable/kHeader.html',
+            require: '?^renderTd',
             controller:function ($scope,$element,$compile,$timeout,serviceData) {
 
             },
             link:function (scope, elem, attrs,ctrl) {
-
+                console.log(ctrl)
             }
 
         }

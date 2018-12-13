@@ -32,7 +32,7 @@ ydApp.factory('serviceData', function() {
             }
         },
 
-        fire : function(event) {
+        emit : function(event) {
 
             var eventType = event.type;
             if (eventMap && eventMap[eventType]) {
@@ -43,17 +43,7 @@ ydApp.factory('serviceData', function() {
         }
     };
 
-    var getRow = function (data) {
-        return  EventBus.fire({
-            type: "getRow",
-            data:data
-        });
-    }
-
-    return {
-        bus:EventBus,
-        getRow:getRow
-    }
+    return EventBus
 })
 
     // // 事件订阅代码：

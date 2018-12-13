@@ -15,24 +15,39 @@
             restrict:'AE',
             // require: '?kTable',
             templateUrl:'direct/ktable/kHeader.html',
-            controller:function ($scope,$element,$compile,$timeout,serviceData) {
+            controller:function ($scope,$element,$filter,$compile,$timeout,serviceData,EventBus) {
+
+                $scope.head = {};
+                $scope.headerData = serviceData[$scope.tableid].columns;
+                $scope.sortTable=function (expression) {
+                    $timeout(function () {
+                        // serviceData[$scope.tableid].httpData= $filter('orderBy')(serviceData[$scope.tableid].httpData, expression)
+                        // serviceData={p:2}
+                        // console.log(serviceData)
+                    },0)
+                };
+
+                // 全选
+                $scope.selectionAll = function () {
+                    console.log(serviceData[$scope.tableid].selectedRow)
+                }
 
 
-               $scope.headerData = serviceData[$scope.tableid].columns;
                 /** 拖拽成功触发方法
                  *   index 拖拽后落下时的元素的序号（下标）
                  *   obj被拖动数据对象
                  */
-
                 $scope.dropComplete = function(index, obj){
 
                     var idx = $scope.headerData.indexOf(obj);
                     $scope.headerData[idx] = $scope.headerData[index];
                     $scope.headerData[index] = obj;
-                    // console.log(serviceData[$scope.tableid].columns)
+                    console.log(serviceData[$scope.tableid].columns)
                 };
+
             },
             link:function (scope, elem, attrs,ctrl) {
+
 
 
             }

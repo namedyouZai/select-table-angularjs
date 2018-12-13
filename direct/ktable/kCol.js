@@ -18,7 +18,8 @@
             // require: '?kTable',
             // templateUrl:'direct/ktable/kHeader.html',
             // template:'<div></div>',
-            controller:function ($scope,$element,$transclude,$compile,$timeout,serviceData) {
+            controller:function ($scope,$element,$transclude,$filter,$compile,$timeout,serviceData) {
+
 
                 if(!$scope.$parent.tableid) {
                     throw "请设置tableid";
@@ -28,9 +29,11 @@
                     serviceData[$scope.$parent.tableid]={
                         columns:[],
                         thead:[],
-                        tableStyle:{}
+                        tableStyle:{},
+                        selectedRow:[]
                     };
                 }
+
 
                 var vm = this;
                 /**
@@ -53,6 +56,7 @@
                 vm.getObjAttr=function (objString,pro,ele) {
                     var obj={};
                     for(var x in objString[pro]) {
+
                         obj[x] = objString[x];
                     }
                     obj.htmlContent = ele.html();

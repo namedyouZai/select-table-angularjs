@@ -18,3 +18,9 @@ td, th {
 .k-table__row--striped:nth-child(even) td {
     background-color: #f5f7fa;
 }
+.span_cell {
+    border:none;
+    width: 80px;
+    height:100%;
+    width: 100%;
+}

@@ -3,10 +3,10 @@
         <colgroup>
             <col ng-repeat="col in bodyData" width="{{col.width || '80px'}}">
         </colgroup>
-        <tr ng-repeat="rowdata in tablebodydata" ng-init="rowIndex=$index" ng-class="{true:'el-table__row k-table__row--striped',false:'el-table__row'}[striped]">
+        <tr ng-repeat="rowdata in tablebodydata "   ng-init="rowIndex=$index+1" ng-class="{true:'el-table__row k-table__row--striped',false:'el-table__row'}[striped]">
             <td ng-repeat="x in bodyData">
-                <!--rowdata[x.prop]-->
-                <render-td row="rowdata" tdrenderrowindex="{{rowIndex}}" celldata="x" ></render-td>
+                <!--{{rowdata[x.prop]}}-->
+                <render-td table-id="{{tableid}}" current-row-data="rowdata" current-row-index="{{rowIndex}}" current-column-props="x" ></render-td>
             </td>
 
         </tr>
