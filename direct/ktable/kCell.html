@@ -1,0 +1,23 @@
+<div class="k-table__body-row-cell">
+    <!--读取prop 有propfn 运行propfn-->
+    <span>
+        {{currentColumnProps.renderfn ? propfn : currentRowData[currentColumnProps.prop] }}
+        <!--<input type="text" class="span_cell" ng-model="currentRowData[currentColumnProps.prop]">-->
+    </span>
+
+    <!--多选框的渲染-->
+    <span ng-if="currentColumnProps.type=='selection'">
+        <input type="checkbox" ng-model="kCell.cellChecked"  ng-change="tBodyCheckboxSelect(currentRowData)">
+    </span>
+
+    <!--序号的渲染-->
+    <span ng-if="currentColumnProps.type=='index'">
+        {{currentRowIndex}}
+    </span>
+
+    <span ng-if="currentColumnProps.type=='content'">
+        <!--<span ng-bind-html="colsHtml"></span>-->
+        <!--{{currentColumnProps.htmlContent}}-->
+    </span>
+
+</div>

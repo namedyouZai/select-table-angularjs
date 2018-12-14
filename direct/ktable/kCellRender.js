@@ -77,11 +77,7 @@
 
                         var fatherScope = ctrl.exposeServiceDataHeadScope();
 
-
-
-
-
-                        [scope.currentColumnProps["callBackFn"]](scope.currentRowData)
+                        fatherScope[scope.currentColumnProps["callBackFn"]](scope.currentRowData)
                     })
                 }
 
