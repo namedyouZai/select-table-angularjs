@@ -8,6 +8,7 @@
     <!--多选框的渲染-->
     <span ng-if="currentColumnProps.type=='selection'">
         <input type="checkbox" ng-model="kCell.cellChecked"  ng-change="tBodyCheckboxSelect(currentRowData)">
+        {{kCell.cellChecked}}
     </span>
 
     <!--序号的渲染-->

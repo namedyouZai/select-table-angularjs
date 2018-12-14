@@ -30,7 +30,7 @@
                         columns:[],
                         thead:[],
                         tableStyle:{},
-                        selectedRow:[]
+                        selectedRows:[]
                     };
                 }
 

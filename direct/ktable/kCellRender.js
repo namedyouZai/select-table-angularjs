@@ -19,7 +19,7 @@
             restrict:'AE',
             // require: '?kTable',
             templateUrl:'direct/ktable/kCell.html',
-            controller:function ($scope,$element,EventBus,serviceData,$timeout,$filter,$compile,$transclude) {
+            controller:function ($scope,$element,EventBus,serviceData) {
 
                 $scope.kCell={};
                 var vm = this;
@@ -30,17 +30,45 @@
                 };
 
                 // 当选框施行增删row数据到service
-                $scope.tBodyCheckboxSelect = function (data) {
+                // $scope.tBodyCheckboxSelect = function (data) {
+                //
+                //     var _dataIndex = serviceData[$scope.tableId].selectedRow.indexOf(data);
+                //     // 发布
+                //     if($scope.kCell.cellChecked) {
+                //         if(_dataIndex<0) {
+                //             serviceData[$scope.tableId].selectedRow.push(data);
+                //         }
+                //     }else {
+                //         serviceData[$scope.tableId].selectedRow.splice(_dataIndex,1);
+                //     }
+                // };
+                // 如果是复选框，则生成变量，并且将变量赋值，跟header保持数据同步，实现全选与反选
+                if($scope.currentColumnProps.type=='selection') {
+                    $scope.kCell={};
+                    EventBus.on('getClosConfig',function (event) {
 
-                    var _dataIndex = serviceData[$scope.tableId].selectedRow.indexOf(data);
-                    // 发布
+                        $scope.kCell.cellChecked = event.data.currentData;
+                    })
+                }
+
+                // 当选框施行增删row数据到service
+                $scope.tBodyCheckboxSelect = function (data) {
+                    var _dataIndex = serviceData[$scope.tableId].selectedRows.indexOf(data);
+
                     if($scope.kCell.cellChecked) {
                         if(_dataIndex<0) {
-                            serviceData[$scope.tableId].selectedRow.push(data);
+                            serviceData[$scope.tableId].selectedRows.push(data);
                         }
                     }else {
-                        serviceData[$scope.tableId].selectedRow.splice(_dataIndex,1);
+                        serviceData[$scope.tableId].selectedRows.splice(_dataIndex,1);
                     }
+                    // 发布change事件
+                    EventBus.emit({
+                        type:'reverseCheck',
+                        data:{
+                            checkedRowLength:serviceData[$scope.tableId].selectedRows.length
+                        }
+                    })
                 };
 
                 // 含有表达式的prop转换

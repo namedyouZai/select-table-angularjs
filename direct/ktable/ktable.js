@@ -64,14 +64,14 @@
                 }
 
                 // 订阅
-                EventBus.on("selectionChange", function(event) {
-
-
-                    $scope.$parent[event.fnName](event.data)
-
-
-                    // 这里处理事件
-                });
+                // EventBus.on("selectionChange", function(event) {
+                //
+                //
+                //     $scope.$parent[event.fnName](event.data)
+                //
+                //
+                //     // 这里处理事件
+                // });
 
             },
             compile:function (element,attrs) {

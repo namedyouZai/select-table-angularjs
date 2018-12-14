@@ -28,9 +28,41 @@
                 };
 
                 // 全选
+                // $scope.selectionAll = function () {
+                //     console.log(serviceData[$scope.tableid].selectedRow)
+                // }
+
+                // 全选
                 $scope.selectionAll = function () {
-                    console.log(serviceData[$scope.tableid].selectedRow)
+
+                    if ($scope.head.tHeadThChecked) {
+                        for(var i=0;i< $scope.headerData.length;i++) {
+                            $scope.headerData[i].isSelect = true;
+                        }
+                        EventBus.emit({
+                            type:'getClosConfig',
+                            data:{
+                                allData:$scope.headerData,
+                                currentData:true
+                            }
+                        })
+                    }else {
+                        for(var i=0;i< $scope.headerData.length;i++) {
+                            $scope.headerData[i].isSelect = false;
+                        }
+                        EventBus.emit({
+                            type:'getClosConfig',
+                            data:{
+                                allData:$scope.headerData,
+                                currentData:false
+                            }
+                        })
+                    }
                 }
+                // 反选
+                EventBus.on('reverseCheck',function (event) {
+                    $scope.head.tHeadThChecked = $scope.headerData.length==event.data.checkedRowLength ? true : false;
+                })
 
 
                 /** 拖拽成功触发方法
