@@ -28,8 +28,10 @@ ydApp.controller('waybillListCtr',function ($scope,$rootScope,$timeout,EventBus)
         console.log(row)
     };
 
-    $scope.showAge = function (row) {
-        console.log(row)
+
+
+    $scope.showAge = function () {
+        console.log($scope.handelSelectChange)
     }
 
     $scope.movea = function (row) {

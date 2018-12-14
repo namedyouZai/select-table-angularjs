@@ -19,50 +19,50 @@
 
                 $scope.head = {};
                 $scope.headerData = serviceData[$scope.tableid].columns;
-                $scope.sortTable=function (expression) {
-                    $timeout(function () {
-                        // serviceData[$scope.tableid].httpData= $filter('orderBy')(serviceData[$scope.tableid].httpData, expression)
-                        // serviceData={p:2}
-                        // console.log(serviceData)
-                    },0)
-                };
+                // $scope.sortTable=function (expression) {
+                //     $timeout(function () {
+                //         // serviceData[$scope.tableid].httpData= $filter('orderBy')(serviceData[$scope.tableid].httpData, expression)
+                //         // serviceData={p:2}
+                //         // console.log(serviceData)
+                //     },0)
+                // };
 
-                // 全选
-                // $scope.selectionAll = function () {
-                //     console.log(serviceData[$scope.tableid].selectedRow)
-                // }
 
-                // 全选
+                // 全选 初始值：$scope.head.tHeadThChecked = false
                 $scope.selectionAll = function () {
-
                     if ($scope.head.tHeadThChecked) {
-                        for(var i=0;i< $scope.headerData.length;i++) {
-                            $scope.headerData[i].isSelect = true;
-                        }
                         EventBus.emit({
-                            type:'getClosConfig',
+                            type:'checkAll',
                             data:{
-                                allData:$scope.headerData,
-                                currentData:true
+                                isSelectAll:false,
+                                selectedRowsData:[],
+                                selectedRowIndex:[]
                             }
-                        })
+                        });
                     }else {
-                        for(var i=0;i< $scope.headerData.length;i++) {
-                            $scope.headerData[i].isSelect = false;
+                        // 进行深拷贝 避免影响到httpData 否则会导致httpData也被增删。影响渲染
+                        var All_TABLE_DATA = angular.copy(serviceData[$scope.tableid].httpData),
+                            allSelectedIndexArr = [];
+                        for(var i = 0;i<All_TABLE_DATA.length;i++) {
+                            allSelectedIndexArr.push(i);
                         }
                         EventBus.emit({
-                            type:'getClosConfig',
+                            type:'checkAll',
                             data:{
-                                allData:$scope.headerData,
-                                currentData:false
+                                // allData:$scope.headerData,
+                                isSelectAll:true,
+                                selectedRowsData:All_TABLE_DATA,
+                                selectedRowIndex:allSelectedIndexArr
                             }
                         })
                     }
+                    // 给父页面赋值
+                    serviceData[$scope.tableid].pageScope[serviceData[$scope.tableid].tableScope['selectChange']] =  serviceData[$scope.tableid].selectedRows;
                 }
                 // 反选
                 EventBus.on('reverseCheck',function (event) {
                     $scope.head.tHeadThChecked = $scope.headerData.length==event.data.checkedRowLength ? true : false;
-                })
+                });
 
 
                 /** 拖拽成功触发方法

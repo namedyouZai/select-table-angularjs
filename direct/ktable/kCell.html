@@ -7,7 +7,7 @@
 
     <!--多选框的渲染-->
     <span ng-if="currentColumnProps.type=='selection'">
-        <input type="checkbox" ng-model="kCell.cellChecked"  ng-change="tBodyCheckboxSelect(currentRowData)">
+        <input type="checkbox" ng-model="kCell.cellChecked"  ng-click="tBodyCheckboxSelect(currentRowData,currentRowIndex)">
         {{kCell.cellChecked}}
     </span>
 

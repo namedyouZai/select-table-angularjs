@@ -2,6 +2,12 @@
  *  @ 指令数据传输格式：{{parentData}} 只是字符串格式
  *   = 指令数据传输格式：'parentData'      与父级双向绑定
  *   & 传表达式 比如函数
+ *   字段说明：
+ *   serviceData[$scope.tableId] ： 用来将同一页面的不同ktable数据进行分离。 {waybill:{},brother:{}}
+ *   pageScope: 当前页面的scope作用域
+ *   tableScope: 当前table的scope作用域
+ *   selectedRows:当前table被选择了rowData 当前被选择了的行数据。
+ *
  */
 
 (function () {
@@ -22,51 +28,54 @@
             controller:function ($scope,$element,EventBus,serviceData) {
 
                 $scope.kCell={};
+                $scope.c_table = serviceData[$scope.tableId];  // 当前table的id
                 var vm = this;
-
                 // 暴露service里的父层$scope给link函数
-                vm.exposeServiceDataHeadScope= function () {
-                   return serviceData[$scope.tableId].headScope
+                vm.exposeServiceDatapageScope= function () {
+                   return $scope.c_table.pageScope
                 };
-
-                // 当选框施行增删row数据到service
-                // $scope.tBodyCheckboxSelect = function (data) {
-                //
-                //     var _dataIndex = serviceData[$scope.tableId].selectedRow.indexOf(data);
-                //     // 发布
-                //     if($scope.kCell.cellChecked) {
-                //         if(_dataIndex<0) {
-                //             serviceData[$scope.tableId].selectedRow.push(data);
-                //         }
-                //     }else {
-                //         serviceData[$scope.tableId].selectedRow.splice(_dataIndex,1);
-                //     }
-                // };
                 // 如果是复选框，则生成变量，并且将变量赋值，跟header保持数据同步，实现全选与反选
+                /**
+                 * 数据类型包括：
+                 *
+                 */
                 if($scope.currentColumnProps.type=='selection') {
                     $scope.kCell={};
-                    EventBus.on('getClosConfig',function (event) {
+                    EventBus.on('checkAll',function (event) {
+                        $scope.kCell.cellChecked = event.data.isSelectAll;
+                        // 进行深拷贝 避免影响到httpData 否则会导致httpData也被增删。影响渲染
+                        $scope.c_table.selectedRows = event.data.selectedRowsData;
+                        $scope.c_table.selectedRowIndex = event.data.selectedRowIndex;
+                    });
 
-                        $scope.kCell.cellChecked = event.data.currentData;
-                    })
                 }
-
                 // 当选框施行增删row数据到service
-                $scope.tBodyCheckboxSelect = function (data) {
-                    var _dataIndex = serviceData[$scope.tableId].selectedRows.indexOf(data);
+                // selectedRowIndex
+                $scope.tBodyCheckboxSelect = function (data,idx) {
+
+                    $scope.kCell.cellChecked = !$scope.kCell.cellChecked;   // 更改当前checkbox的状态
+                    var index = parseInt(idx) -1;
+
+                    var _dataIndex = $scope.c_table.selectedRowIndex.indexOf(index);
 
                     if($scope.kCell.cellChecked) {
                         if(_dataIndex<0) {
-                            serviceData[$scope.tableId].selectedRows.push(data);
+                            $scope.c_table.selectedRows.push(data);
+                            $scope.c_table.selectedRowIndex.push(index);
                         }
                     }else {
-                        serviceData[$scope.tableId].selectedRows.splice(_dataIndex,1);
-                    }
-                    // 发布change事件
+                        $scope.c_table.selectedRows.splice(_dataIndex,1);
+                        $scope.c_table.selectedRowIndex.splice(_dataIndex,1);
+                    };
+
+                    // 给父页面赋值
+                    $scope.c_table.pageScope[$scope.c_table.tableScope['selectChange']] =  $scope.c_table.selectedRows;
+
+                    // 发布change事件 用来控制反选
                     EventBus.emit({
                         type:'reverseCheck',
                         data:{
-                            checkedRowLength:serviceData[$scope.tableId].selectedRows.length
+                            checkedRowLength:$scope.c_table.selectedRows.length
                         }
                     })
                 };
@@ -103,7 +112,7 @@
 
                     elem.bind(scope.currentColumnProps["callBackType"],function () {
 
-                        var fatherScope = ctrl.exposeServiceDataHeadScope();
+                        var fatherScope = ctrl.exposeServiceDatapageScope();
 
                         fatherScope[scope.currentColumnProps["callBackFn"]](scope.currentRowData)
                     })

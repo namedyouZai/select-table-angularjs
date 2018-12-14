@@ -8,7 +8,7 @@
                 <span ng-drag="true" ng-drag-data="row" >
                     {{row.label==='全选' ? '' : row.label}}
                     <i ng-if="row.sort=='true'" ng-click="sortTable(row.prop)">换</i>
-                    <input type="checkbox" ng-if="row.type=='selection'" ng-model="head.tHeadThChecked"  ng-change="selectionAll()">
+                    <input type="checkbox" ng-if="row.type=='selection'" ng-model="head.tHeadThChecked"  ng-click="selectionAll()">
 
                     <!--<label role="checkbox" class="el-checkbox">-->
                         <!--<span aria-checked="mixed" class="el-checkbox__input">-->

@@ -27,10 +27,12 @@
                 if(typeof serviceData[$scope.$parent.tableid] !='object') {
 
                     serviceData[$scope.$parent.tableid]={
-                        columns:[],
-                        thead:[],
-                        tableStyle:{},
-                        selectedRows:[]
+                        columns:[],             // 编程人员手写的 k-col 属性集合。
+                        thead:[],               //
+                        tableStyle:{},          //
+                        selectedRows:[],        // 已经选择的row的数据数组集合
+                        selectedRowIndex:[],  // 已选择的row的下标数组集合，配合selectedRows用来删除其固定row
+                        tableScope:''           // table的作用域
                     };
                 }
 

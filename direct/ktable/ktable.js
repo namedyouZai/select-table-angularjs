@@ -20,7 +20,8 @@
             scope:{
                 ktabledata:'=',
                 prt:'=',
-                tableid:'@'
+                tableid:'@',
+                selectChange:'@'
             },
             restrict:'AE',
             replace:true,
@@ -53,25 +54,37 @@
 
                 // 将table的样式统一存入到service 供其他子指令取
                 vm.getTableStyle= function (attr) {
-
                     serviceData[$scope.tableid].tableStyle={
                         bodyTableHeight:attr.height,
                         bodyTableStripe:attr.stripe ===undefined ? false : true
                     };
-                    serviceData[$scope.tableid].headScope = $scope.$parent;
                     $scope.kTableBodyWarpStyle = {height:serviceData[$scope.tableid].tableStyle.bodyTableHeight}
+                };
 
+                vm.setTableAndPageScope = function () {
+                    serviceData[$scope.tableid].pageScope = $scope.$parent;
+                    serviceData[$scope.tableid].tableScope = $scope;
                 }
 
-                // 订阅
-                // EventBus.on("selectionChange", function(event) {
-                //
-                //
-                //     $scope.$parent[event.fnName](event.data)
-                //
-                //
+
+                // 订阅 点击全选按钮
+                // EventBus.on("checkAll", function(event) {
+                //     $scope.selectionAll()(event.data.selectedRowsData);
                 //     // 这里处理事件
                 // });
+                // // 当用户手动勾选数据行的 Checkbox 时触发的事件
+                // EventBus.on('reverseCheck',function (event) {
+                //     $scope.select()(event.data.selectedRowsData);
+                // })
+                // // 当选择项发生变化时会触发该事件
+                // EventBus.on('reverseCheck',function (event) {
+                //     $scope.select()(event.data.selectedRowsData);
+                // })
+
+                // vm.getSelectRowsData = function () {
+                //
+                //     return serviceData[$scope.tableid].selectedRows;
+                // }
 
             },
             compile:function (element,attrs) {
@@ -82,7 +95,6 @@
                     // 最后执行
 
                     ctrl.getTableStyle($attrs);
-                    console.log(ctrl.getServiceThead());
 
 
                 }
