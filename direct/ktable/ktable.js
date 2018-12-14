@@ -29,6 +29,7 @@
             templateUrl:'direct/ktable/kBasic.html',
             controller:function ($scope,$element,$compile,$timeout,serviceData,EventBus) {
 
+
                 // 其次执行
                 $timeout(function () {
                     var HTTP_DATA = [{sex:'女',name:'妲己',age:'24',height:'165cm',weight:'80',money:'$110',id:7},
@@ -95,7 +96,7 @@
                     // 最后执行
 
                     ctrl.getTableStyle($attrs);
-
+                    ctrl.setTableAndPageScope();
 
                 }
             }
